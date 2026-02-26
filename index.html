@@ -29,24 +29,24 @@
 
         <section id="player">
             <div class="playercontent">
-                <canvas id="espectro"></canvas>
-
                 <div id="vinil" class="disco">
                     <div class="capa-musica"></div>
                 </div>
                 
                 <div id="agulha" class="agulha"></div>
                 
+                <canvas id="espectro"></canvas>
+                
                 <div class="controles">
-                    <div class="botoes-midia">
-                        <button id="btn-prev">Anterior</button>
-                        <button id="btn-play">Play</button>
-                        <button id="btn-next">Próxima</button>
-                    </div>
+                    <button id="btn-prev">Anterior</button>
+                    <button id="btn-play">Play/Pause</button>
+                    <button id="btn-next">Próxima</button>
                     
                     <label for="upload-musica" class="upload-label">Adicionar Música</label>
                     <input type="file" id="upload-musica" accept="audio/*" multiple>
                 </div>
+                
+                <audio id="audio-player"></audio>
             </div>
         </section>
         
