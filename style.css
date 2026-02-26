@@ -74,7 +74,7 @@ h1 {
 
 .playercontent {
     position: relative; 
-    width: 90%;
+    width: 95%;
     max-width: 1000px;
     height: 600px;
     background-color: #4a2f15; 
@@ -91,7 +91,7 @@ h1 {
 
 .disco {
     position: absolute;
-    top: 50%;
+    top: 45%;
     left: 40%;
     transform: translate(-50%, -50%); 
     width: 480px;
@@ -133,7 +133,6 @@ h1 {
     100% { transform: translate(-50%, -50%) rotateY(0deg) translateZ(0); opacity: 1; }
 }
 
-/* AJUSTADO: Seletor correto para quando a classe está no próprio disco */
 .disco.tocando {
     animation: girarSimples 2s linear infinite;
 }
@@ -160,4 +159,99 @@ h1 {
     content: '';
     position: absolute;
     bottom: -5px;
-    left: -10px; }
+    left: -10px;
+    width: 35px;
+    height: 50px;
+    background: #222;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+}
+
+.controles {
+    position: absolute;
+    bottom: 20px;
+    right: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    z-index: 20;
+}
+
+.botoes-midia {
+    display: flex;
+    gap: 10px;
+}
+
+button, .upload-label {
+    background: #dd9e3f;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    text-align: center;
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.topnav a:hover, button:hover, .upload-label:hover {
+    transform: translateY(-5px);
+    filter: brightness(1.1);
+}
+
+#upload-musica { display: none; }
+
+#espectro {
+    position: absolute;
+    top: 50%;
+    left: 40%;
+    transform: translate(-50%, -50%);
+    width: 650px;
+    height: 400px;
+    z-index: 1;
+    pointer-events: none;
+}
+
+#feedback {
+    width: 90%;
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 30px;
+    background: rgba(0, 0, 0, 0.4); 
+    border-radius: 15px;
+    border: 2px solid #dd9e3f; 
+}
+
+#feedback h2 {
+    color: #dd9e3f;
+    font-family: "Playfair Display", serif;
+    font-size: 32px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+#form-feedback {
+    display: flex;
+    flex-direction: column; 
+    gap: 15px; 
+}
+
+#form-feedback input, #form-feedback textarea {
+    padding: 12px;
+    border-radius: 5px;
+    border: 1px solid #4a2f15;
+    background-color: #1a1a1a;
+    color: white;
+    outline: none;
+}
+
+#form-feedback textarea { height: 120px; resize: none; }
+
+@media (max-width: 768px) {
+    h1 { font-size: 40px; }
+    .disco { width: 280px; height: 280px; left: 50%; top: 35%; }
+    .capa-musica { width: 80px; height: 80px; }
+    .agulha { right: 40px; height: 160px; top: 20px; transform: rotate(-10deg); }
+    .controles { position: relative; right: auto; margin-top: 400px; align-items: center; width: 100%; }
+    #espectro { left: 50%; width: 320px; }
+    #feedback { padding: 20px; }
+}

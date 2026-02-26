@@ -14,7 +14,6 @@ const ctxCanvas = canvas.getContext('2d');
 
 let playerA = new Audio();
 let playerB = new Audio();
-
 playerA.preload = "auto";
 playerB.preload = "auto";
 
@@ -26,7 +25,7 @@ let tocando = false;
 let contextoAudio, analisador, dataArray, bufferLength;
 
 function extrairCapa(file) {
-    if (!window.jsmediatags) return;
+    if (!window.jsmediatags || !file) return;
     window.jsmediatags.read(file, {
         onSuccess: function(tag) {
             const image = tag.tags.picture;
@@ -68,7 +67,9 @@ function iniciarEspectro(player) {
         const fonte = contextoAudio.createMediaElementSource(player);
         fonte.connect(analisador);
         analisador.connect(contextoAudio.destination);
-    } catch (e) { console.log("Fonte já conectada"); }
+    } catch (e) { 
+        console.log("Fonte de áudio já conectada."); 
+    }
     
     desenhar();
 }
@@ -78,7 +79,7 @@ function desenhar() {
     if (!analisador) return;
     analisador.getByteFrequencyData(dataArray);
     ctxCanvas.clearRect(0, 0, canvas.width, canvas.height);
-    const larguraBarra = (canvas.width / bufferLength) * 2;
+    const larguraBarra = (canvas.width / bufferLength) * 2.5;
     let x = 0;
     for (let i = 0; i < bufferLength; i++) {
         const alturaBarra = dataArray[i] / 1.5;
@@ -104,7 +105,6 @@ function fazerCrossfade(index) {
         playerAtivo = novoPlayer;
 
         if (tocando) {
-            
             const playPromise = novoPlayer.play();
             if (playPromise !== undefined) {
                 playPromise.then(_ => {
@@ -113,13 +113,14 @@ function fazerCrossfade(index) {
                         if (vol < 1) {
                             vol = Math.min(1, vol + 0.05);
                             novoPlayer.volume = vol;
-                            playerAntigo.volume = 1 - vol;
+                            playerAntigo.volume = Math.max(0, 1 - vol);
                         } else {
                             playerAntigo.pause();
+                            playerAntigo.currentTime = 0;
                             clearInterval(intervalo);
                         }
-                    }, 100);
-                }).catch(error => { console.log("Play bloqueado pelo navegador"); });
+                    }, 50);
+                }).catch(error => { console.log("Autoplay bloqueado."); });
             }
             setTimeout(() => { if (tocando) agulha.style.transform = 'rotate(25deg)'; }, 1100);
         } else {
@@ -137,8 +138,12 @@ function fazerCrossfade(index) {
 btnPlay.addEventListener('click', () => {
     if (playlistUrls.length === 0) return alert("Adicione músicas!");
     
-   
-    if (contextoAudio && contextoAudio.state === 'suspended') {
+    if (!contextoAudio) {
+        iniciarEspectro(playerA);
+        iniciarEspectro(playerB);
+    }
+    
+    if (contextoAudio.state === 'suspended') {
         contextoAudio.resume();
     }
     
@@ -163,16 +168,11 @@ btnPlay.addEventListener('click', () => {
 uploadMusica.addEventListener('change', (e) => {
     const ficheiros = Array.from(e.target.files);
     ficheiros.forEach(file => {
-        if (file.type.startsWith('audio/') && playlistUrls.length < 5) {
+        if (file.type.startsWith('audio/') && playlistUrls.length < 10) {
             playlistFiles.push(file);
             playlistUrls.push(URL.createObjectURL(file));
         }
     });
-    if (playlistUrls.length > 0) {
-       
-        iniciarEspectro(playerA);
-        iniciarEspectro(playerB);
-    }
 });
 
 btnNext.addEventListener('click', () => {
