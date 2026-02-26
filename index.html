@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dev Vinyl Club</title>
+    <meta name="description" content="Um jeito puro de ouvir suas músicas">
+    <meta name="Author" content="Feito por Rest_lab">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>Dev Vinyl Club</h1>
+        <p class="header-subtitle"><em>Um jeito puro de ouvir suas músicas</em></p>
+        
+        <nav class="topnav">
+            <a href="https://github.com/RESt-lab" class="active" target="_blank">Github</a>
+            <a href="#feedback">Feedback</a>
+            <a href="#sobredev">Sobre</a>
+        </nav>
+    </header>
+
+    <main>
+        <section id="sobredev">
+            <h2 class="abouth2">O que é Dev Vinyl Club?</h2>
+            <p class="h2p">Esse projeto chamado de <strong>Dev Vinyl Club</strong> foi feito baseado na ideia de ouvir músicas do jeito mais puro possível simulando uma vitrola, aqui você decide a vibe. Trata-se de um site baseado principalmente em <em>Desenvolvimento Web</em> para que você possa desfrutar de tudo na palma da sua mão. Aproveite!!</p>
+        </section>
+
+        <section id="player">
+            <div class="playercontent">
+                <div id="vinil" class="disco">
+                    <div class="capa-musica"></div>
+                </div>
+                
+                <div id="agulha" class="agulha"></div>
+                
+                <canvas id="espectro"></canvas>
+                
+                <div class="controles">
+                    <button id="btn-prev">Anterior</button>
+                    <button id="btn-play">Play/Pause</button>
+                    <button id="btn-next">Próxima</button>
+                    
+                    <label for="upload-musica" class="upload-label">Adicionar Música</label>
+                    <input type="file" id="upload-musica" accept="audio/*" multiple>
+                </div>
+                
+                <audio id="audio-player"></audio>
+            </div>
+        </section>
+        
+        <section id="feedback">
+            <h2>Feedback</h2>
+            <form id="form-feedback">
+                <input type="text" placeholder="Seu Nome" required>
+                <textarea placeholder="Sua Mensagem" required></textarea>
+                <button type="submit">Enviar</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Dev Vinyl Club - Feito por Rest_lab</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

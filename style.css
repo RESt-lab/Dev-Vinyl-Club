@@ -1,0 +1,264 @@
+@import url('https://fonts.googleapis.com/css2?family=Gravitas+One&family=Lato:ital,wght@0,100;0,400;0,700;1,400&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=SN+Pro:ital,wght@0,200..900;1,200..900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    width: 100%;
+    overflow-x: hidden;
+    background: #81592d;
+    background-image: 
+        linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px),
+        linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px);
+    background-size: 50px 50px;
+    color: black;
+    font-family: "Lato", sans-serif;
+}
+
+header {
+    background: linear-gradient(163deg, rgba(255, 140, 0, 1) 0%, rgba(0, 0, 0, 1) 100%);
+    border-bottom: 5px solid #221100;
+}
+
+h1 {
+    color: #dd9e3f;
+    padding: 30px; 
+    text-align: center;
+    font-size: 70px;
+    font-family: "Gravitas One", serif;
+}
+
+.header-subtitle {
+    color: #fff;
+    text-align: center;
+    font-size: 25px;
+    font-family: "SN Pro", sans-serif;
+    margin-bottom: 10px;
+}
+
+.topnav {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    padding: 15px;
+}
+
+.topnav a {
+    text-decoration: none;
+    color: #dd9e3f;
+    font-weight: bold;
+    font-size: 18px;
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.abouth2 {
+    color: #dd9e3f;
+    text-align: center;
+    font-size: 42px;
+    padding: 20px;
+    font-family: "Playfair Display", serif;
+}
+
+.h2p {
+    margin: 20px auto;
+    font-size: 20px;
+    color: #ffffff;
+    font-family: "Playfair Display", serif;
+    max-width: 800px;
+    text-align: center;
+    padding: 0 20px;
+}
+
+.playercontent {
+    position: relative; 
+    width: 90%;
+    max-width: 1000px;
+    height: 600px;
+    background-color: #4a2f15; 
+    margin: 50px auto; 
+    border-radius: 15px;
+    border: 10px solid #221100;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    perspective: 2000px; 
+}
+
+.disco {
+    position: absolute;
+    top: 50%;
+    left: 40%;
+    transform: translate(-50%, -50%); 
+    width: 480px;
+    height: 480px;
+    background: repeating-radial-gradient(circle, #111 0px, #111 2px, #1d1d1d 3px);
+    border-radius: 50%;
+    box-shadow: 0 0 50px rgba(0,0,0,0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    transform-style: preserve-3d;
+    transition: filter 0.5s;
+}
+
+.capa-musica {
+    width: 150px;
+    height: 150px;
+    background-color: #333;
+    border-radius: 50%;
+    border: 5px solid #111;
+    background-size: cover;
+    background-position: center;
+  
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
+}
+
+
+
+
+@keyframes girarSimples {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+
+@keyframes trocaDiscoFisica {
+    0% { transform: translate(-50%, -50%) rotateY(0deg) translateZ(0); opacity: 1; }
+    25% { transform: translate(-50%, -50%) rotateY(45deg) translateZ(500px) translateX(-50%); }
+    45% { transform: translate(-50%, -50%) rotateY(90deg) translateZ(800px) translateX(-150%); opacity: 0; }
+    55% { transform: translate(-50%, -50%) rotateY(-90deg) translateZ(800px) translateX(150%); opacity: 0; }
+    75% { transform: translate(-50%, -50%) rotateY(-45deg) translateZ(500px) translateX(50%); }
+    100% { transform: translate(-50%, -50%) rotateY(0deg) translateZ(0); opacity: 1; }
+}
+
+
+.tocando .disco {
+    animation: girarSimples 2s linear infinite;
+}
+
+
+.animar-troca {
+    animation: trocaDiscoFisica 2.5s ease-in-out !important;
+}
+
+
+.agulha {
+    position: absolute;
+    top: 40px;
+    right: 320px;
+    width: 15px;
+    height: 280px;
+    background: linear-gradient(90deg, #888, #ddd, #888);
+    border-radius: 10px;
+    z-index: 10;
+    transform-origin: top center;
+    transform: rotate(-15deg);
+    transition: transform 0.8s ease-in-out;
+}
+
+.agulha::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: -10px;
+    width: 35px;
+    height: 50px;
+    background: #222;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+}
+
+.controles {
+    position: absolute;
+    bottom: 20px;
+    right: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    z-index: 20;
+}
+
+.botoes-midia {
+    display: flex;
+    gap: 10px;
+}
+
+button, .upload-label {
+    background: #dd9e3f;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    text-align: center;
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.topnav a:hover, button:hover, .upload-label:hover {
+    transform: translateY(-5px);
+    filter: brightness(1.1);
+}
+
+#upload-musica { display: none; }
+
+#espectro {
+    position: absolute;
+    top: 50%;
+    left: 40%;
+    transform: translate(-50%, -50%);
+    width: 650px;
+    height: 400px;
+    z-index: 1;
+    pointer-events: none;
+}
+
+#feedback {
+    width: 90%;
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 30px;
+    background: rgba(0, 0, 0, 0.4); 
+    border-radius: 15px;
+    border: 2px solid #dd9e3f; 
+}
+
+#feedback h2 {
+    color: #dd9e3f;
+    font-family: "Playfair Display", serif;
+    font-size: 32px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+#form-feedback {
+    display: flex;
+    flex-direction: column; 
+    gap: 15px; 
+}
+
+#form-feedback input, #form-feedback textarea {
+    padding: 12px;
+    border-radius: 5px;
+    border: 1px solid #4a2f15;
+    background-color: #1a1a1a;
+    color: white;
+    outline: none;
+}
+
+#form-feedback textarea { height: 120px; resize: none; }
+
+@media (max-width: 768px) {
+    h1 { font-size: 40px; }
+    .disco { width: 280px; height: 280px; left: 50%; top: 35%; }
+    .capa-musica { width: 80px; height: 80px; }
+    .agulha { right: 40px; height: 160px; top: 20px; transform: rotate(-10deg); }
+    .controles { position: relative; right: auto; margin-top: 400px; align-items: center; width: 100%; }
+    #espectro { left: 50%; width: 320px; }
+    #feedback { padding: 20px; }
+}
